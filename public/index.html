@@ -10,5 +10,21 @@
     <input type="text" id="search" placeholder='Enter keyword'/>
     <button id="getTweets">Search Tweets</button>
     <ul id="output"></ul>
+    <script>
+            const search = document.getElementById('search');
+            const button = document.getElementById('getTweets');
+            const output = document.getElementById('output');
+    
+            button.addEventListener('click', function() {
+                const url = '/tweets/' + search.value;
+                fetch(url).then(function(response)  {
+                    return response.json();
+                }).then(function(data)  {
+                    console.log(data);
+                }).catch(function(error)    {
+                    console.log(JSON.stringify(error));
+                });
+            });
+        </script>
 </body>
 </html>
