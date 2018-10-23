@@ -5,6 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Twitter API NodeJS</title>
+    <style>
+        #output {
+            font-size: 1.4em;
+            list-style: none;
+        }
+
+        #output li  {
+            display: block;
+            color: #222;
+            background-color: white;
+            line-height: 30px;
+            border-bottom: solid 1px #CCC;
+            padding-left: 10px;
+        }
+
+        #output li:hover    {
+            background-color: #ddd;
+        }
+
+        #output li a    {
+            color: #222;
+            text-decoration: none;
+        }
+
+        #output li span {
+            color: #666;
+            font-size: 0.8em;
+        }
+    </style>
 </head>
 <body>
     <input type="text" id="search" placeholder='Enter keyword'/>
@@ -32,7 +61,7 @@
                     let link = `<a href='https://twitter.com/i/web/status/${tweet.id_str}' target='_blank'>${tweet.text}</a>`;
                     let li = document.createElement('li');
                     let span = document.createElement('span');
-                    span.innerHTML = `${link}<small>${tweet.user.name}</small>`;
+                    span.innerHTML = `${link}<small>${tweet.user.name}</small> | Retweets: ${tweet.retweet_count}`;
                     li.appendChild(span);
                     output.appendChild(li);
                 });
