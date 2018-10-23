@@ -36,6 +36,10 @@
     </style>
 </head>
 <body>
+    <form id="publishTweet">
+        <textarea id="newTweet" rows="5"></textarea>
+        <button type="submit">Publish</button>
+    </form>
     <input type="text" id="search" placeholder='Enter keyword'/>
     <button id="getTweets">Search Tweets</button>
     <ul id="output"></ul>
@@ -43,7 +47,24 @@
             const search = document.getElementById('search');
             const button = document.getElementById('getTweets');
             const output = document.getElementById('output');
-    
+            const publishTweet = document.getElementById('publishTweet');
+
+            publishTweet.addEventListener('submit', function()  {
+                event.preventDefault();
+                let newTweet = {
+                    'tweet': document.getElementById('newTweet' ).value
+                };
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', '/tweet/', true);
+                xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState != 4 || xhr.status != 200)
+                        return;
+                    console.log(xhr.responseText);
+                }
+                xhr.send(JSON.stringify(newTweet));
+            });
+
             button.addEventListener('click', function() {
                 const url = `/tweets/${search.value}`;
                 fetch(url).then(function(response)  {
