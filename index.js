@@ -26,4 +26,11 @@ app.get('/tweets/:search', function(req, res)   {
     
 });
 
+app.post('/tweet/', function(req, res)   {
+
+    T.post('statuses/update', { status: req.body.tweet }, function(err, data, response) {
+        res.json(data);
+    });
+});
+
 app.listen(3000);
