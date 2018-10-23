@@ -1,0 +1,27 @@
+#output {
+    font-size: 1.4em;
+    list-style: none;
+}
+
+#output li  {
+    display: block;
+    color: #222;
+    background-color: white;
+    line-height: 30px;
+    border-bottom: solid 1px #CCC;
+    padding-left: 10px;
+}
+
+#output li:hover    {
+    background-color: #ddd;
+}
+
+#output li a    {
+    color: #222;
+    text-decoration: none;
+}
+
+#output li span {
+    color: #666;
+    font-size: 0.8em;
+}

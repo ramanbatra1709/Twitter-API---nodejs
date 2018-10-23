@@ -5,35 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Twitter API NodeJS</title>
-    <style>
-        #output {
-            font-size: 1.4em;
-            list-style: none;
-        }
-
-        #output li  {
-            display: block;
-            color: #222;
-            background-color: white;
-            line-height: 30px;
-            border-bottom: solid 1px #CCC;
-            padding-left: 10px;
-        }
-
-        #output li:hover    {
-            background-color: #ddd;
-        }
-
-        #output li a    {
-            color: #222;
-            text-decoration: none;
-        }
-
-        #output li span {
-            color: #666;
-            font-size: 0.8em;
-        }
-    </style>
+    <link href="./css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form id="publishTweet">
@@ -43,50 +15,6 @@
     <input type="text" id="search" placeholder='Enter keyword'/>
     <button id="getTweets">Search Tweets</button>
     <ul id="output"></ul>
-    <script>
-            const search = document.getElementById('search');
-            const button = document.getElementById('getTweets');
-            const output = document.getElementById('output');
-            const publishTweet = document.getElementById('publishTweet');
-
-            publishTweet.addEventListener('submit', function()  {
-                event.preventDefault();
-                let newTweet = {
-                    'tweet': document.getElementById('newTweet' ).value
-                };
-                let xhr = new XMLHttpRequest();
-                xhr.open('POST', '/tweet/', true);
-                xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState != 4 || xhr.status != 200)
-                        return;
-                    console.log(xhr.responseText);
-                }
-                xhr.send(JSON.stringify(newTweet));
-            });
-
-            button.addEventListener('click', function() {
-                const url = `/tweets/${search.value}`;
-                fetch(url).then(function(response)  {
-                    return response.json();
-                }).then(function(data)  {
-                    outputData(data.statuses);
-                }).catch(function(error)    {
-                    console.error(error);
-                });
-            });
-
-            function outputData(tweets)   {
-                output.innerHTML = '';
-                tweets.forEach(function(tweet)    {
-                    let link = `<a href='https://twitter.com/i/web/status/${tweet.id_str}' target='_blank'>${tweet.text}</a>`;
-                    let li = document.createElement('li');
-                    let span = document.createElement('span');
-                    span.innerHTML = `${link}<small>${tweet.user.name}</small> | Retweets: ${tweet.retweet_count}`;
-                    li.appendChild(span);
-                    output.appendChild(li);
-                });
-            }
-        </script>
+    <script src='./js/app.js'></script>
 </body>
 </html>
